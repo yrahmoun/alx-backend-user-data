@@ -3,7 +3,7 @@
 from api.v1.views import app_views
 from models.user import User
 from flask import jsonify, request
-from os import getenv, abort, enviro
+from os import getenv, abort, environ
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
