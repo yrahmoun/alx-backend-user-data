@@ -34,3 +34,10 @@ class Auth():
     def current_user(self, request=None) -> TypeVar('User'):
         """ Flask request object """
         return None
+
+    def session_cookie(self, request=None):
+        """ Returns request cookie """
+        if request is None:
+            return None
+        cookie = getenv('SESSION_NAME')
+        return request.cookies.get(cookie)
