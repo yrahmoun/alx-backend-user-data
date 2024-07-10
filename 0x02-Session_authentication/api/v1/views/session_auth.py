@@ -3,7 +3,7 @@
 from api.v1.views import app_views
 from models.user import User
 from flask import jsonify, request
-from os import getenv
+from os import getenv, abort, enviro
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -27,3 +27,16 @@ def session_login() -> str:
     user_dict = jsonify(is_valid_user.to_json())
     user_dict.set_cookie(cookie_response, session_id)
     return user_dict
+
+@app_views.route(
+    '/auth_session/logout',
+    methods=['DELETE'],
+    strict_slashes=False)
+def session_logout() -> str:
+    """
+    Returns deleted json
+    """
+    from api.v1.app import auth
+    if auth.destroy_session(request):
+        return jsonify({}), 200
+    abort(404)
