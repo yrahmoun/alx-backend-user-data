@@ -47,7 +47,7 @@ class Auth:
         if bcrypt.checkpw(encoded_password, user_password):
             return True
         return False
-    
+
     def create_session(self, email: str) -> str:
         """ Returns new session ID """
         try:
